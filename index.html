@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Device Hacked - Awareness Simulation</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:,">
+</head>
+<body>
+
+  <!-- Matrix background -->
+  <canvas id="matrix"></canvas>
+
+  <!-- Foreground content -->
+  <div class="content">
+    <!-- Animated typewriter heading -->
+    <h1 class="typewriter" id="typewriterText"></h1>
+
+    <!-- Fake terminal logs -->
+    <div class="log-area" id="logArea"></div>
+
+    <!-- Awareness Reveal Section -->
+    <div class="reveal hidden" id="revealMessage">
+      <h2>😅 Just Kidding!</h2>
+      <p>This was a simulated cyber awareness demo. <strong>Your device is completely safe.</strong></p>
+      <p>Never click links from unknown or unverified sources — even if they appear to be from friends or family. Scammers can spoof anyone.</p>
+      <p><strong>Stay alert. Stay aware. The next one might not be a joke.</strong></p>
+      <button onclick="shareAwareness()">
+        📢 Share with your friends, family & knowns — test them to see if they’re smart or not!
+      </button>
+    </div>
+  </div>
+
+  <!-- Glitch sound effect -->
+  <audio id="glitchSound" src="glitch.mp3" preload="auto"></audio>
+
+  <!-- Main Script -->
+  <script src="script.js"></script>
+
+  <!-- Audio Trigger on First Click -->
+  <script>
+    document.addEventListener("click", () => {
+      const audio = document.getElementById("glitchSound");
+      audio.volume = 0.5;
+      audio.play().catch(() => console.warn("Audio blocked"));
+    }, { once: true });
+  </script>
+<script>
+  // Play glitch.mp3 once on first user interaction (every refresh)
+  window.addEventListener("DOMContentLoaded", () => {
+    const glitchAudio = new Audio("glitch.mp3");
+    glitchAudio.volume = 0.5;
+
+    const playOnce = () => {
+      glitchAudio.play().catch(() => console.warn("Autoplay blocked"));
+      document.removeEventListener("click", playOnce);
+      document.removeEventListener("keydown", playOnce);
+      document.removeEventListener("scroll", playOnce);
+    };
+
+    document.addEventListener("click", playOnce);
+    document.addEventListener("keydown", playOnce);
+    document.addEventListener("scroll", playOnce);
+  });
+</script>
+
+</body>
+</html>
